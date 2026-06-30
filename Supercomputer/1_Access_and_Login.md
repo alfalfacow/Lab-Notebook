@@ -47,16 +47,16 @@ Tada! You are now connected to your Expanse supercomputer account and ready to s
 An alternative to the command line with additional convenient features is the Termius application. It is an ssh client that provides a more visual interface to logging into your Expanse account and manipulating/navigating files. [Termius](https://termius.com/education) is available for FREE as long as you have a Github Student Developer Pack (sign up with your UCSD email [here](https://education.github.com/pack)! You will need to send verification of your student identity such as an ID, transcript, etc.).
 
 Below is what the homepage should look like. To access your supercomputer account via ssh, you want to set up a "new host" (circled in red)
-![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius1.jpg)
+![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius1.png)
 
 After you click on "New Host", an interface will pop up on the right side of the application that allows you to input information. You will need to put the Expanse address, your username, and your password in the indicated fields. After that, everything should be set up! To connect to your supercomputer account, simple double click the newly created host under the "Hosts" section of the home screen. It will open up a separate tab with prompts for your password and TOTP code (same as Command Line). After successfully logging in, a terminal tab will be opened where you can fully access the supercomputer resources!
-![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius2.jpg)
+![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius2.png)
 
 A very convenient feature of Termius not available with the command line is the SFTP tab (Secure File Transfer Protocol, or SSH File Transfer Protocol). It displays the files and folders on your native/personal computer on the left, and the files and folders on the remote computer (supercomputer that you are accessing via ssh) on the right. Note that to access the files and folders on the supercomputer you will need to separately connect via ssh by inputting your password and TOTP code. 
-![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius3.jpg)
+![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius3.png)
 
 This feature allows you to drag, copy+paste, and manipulate files between both computers as you would while accessing the file explorer normally! It allows for easy visualization of the files and file structure in your systems. This is a major reason why I prefer Termius :)
 
-![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius4.jpg)
+![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius4.png)
 
 I hope that these notes have taught you a bit more about supercomputers and how to log into your Expanse account!
