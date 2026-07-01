@@ -122,7 +122,7 @@ micromamba create --name <ENV_NAME> <PACKAGE>=<VERSION> <PACKAGE> <PACKAGE> #cre
 micromamba create -n <ENV_NAME> python=<name_of_Python_version> #for python
 micromamba create -n <name_of_environment> r-base=<name_of_R_version> #for R studio
 ```
-Note: for creating environments with R studio, it is recommended to use micromamba due to the faster and lighter nature compared to conda, as described above. The first time I tried this with conda, it kept failing.
+Note: for creating environments with # R studio #, it is recommended to use micromamba due to the faster and lighter nature compared to conda, as described above. The first time I tried this with conda, it kept failing.
 
 ### 3.2: Activate
 To activate a created environment, simply use:
