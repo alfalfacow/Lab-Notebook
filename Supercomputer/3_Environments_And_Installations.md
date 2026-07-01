@@ -19,6 +19,8 @@
 * 4.1: Exporting
 * 4.2: Recreating
 
+5: Considerations for batch jobs
+
 ## 1: What are Conda and Mamba?
 Conda and Mamba are commonly used "Package and Environment Managers"; both are used to create isolated "environments" for Python and R programming.
 
@@ -189,6 +191,9 @@ To use a .yml file to recreate the environment on your own computer, use the fol
 conda env create --file environment.yml
 ```
 The environment.yml file should be in the same directory as your current directory so you are able to access it!
+
+## 4: Considerations for batch jobs
+TBA soon
 
 That's all for environments; please let me know if any of the code doesn't work, is outdated, or if there are any factual errors!
 
