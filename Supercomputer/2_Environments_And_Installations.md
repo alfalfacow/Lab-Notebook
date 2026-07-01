@@ -142,6 +142,10 @@ conda install <PACKAGE>=<VERSION> <PACKAGE>=<VERSION> --name <ENV_NAME> #this in
 conda install <PACKAGE>=<VERSION> <PACKAGE>=<VERSION> <PACKAGE>=<VERSION> #this installs multiple packages in the currently activated conda environment (activate command)
 conda install <PACKAGE>=<VERSION> <PACKAGE>=<VERSION> --name <ENV_NAME> #this installs packages in the specified environment that may or may not be currently activated!
 
+#Python dependencies: some may require you to use the pip command to install, you will likely see this in installation guides for different packages
+pip install <python_package>
+pip install cell2location #example of real life package
+
 ```
 Note from [documentation](https://www.anaconda.com/docs/getting-started/working-with-conda/packages/using-r-language) to keep in mind: "When using conda to install R packages, add r- before the regular package name. For instance, to install rbokeh, use conda install r-rbokeh. To install rJava, use conda install r-rjava."
 
