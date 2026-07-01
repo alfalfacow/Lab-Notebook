@@ -94,7 +94,7 @@ Lastly, after installation and initialization following the prompts, it will tel
 # The prompt that shows up following installation is below:
 # Please restart your shell to activate micromamba or run the following:\n
   source ~/.bashrc (or ~/.zshrc, ~/.xonshrc, ~/.config/fish/config.fish, ...)
-The code for resetting the shell is below
+# The code for resetting the shell is in the below box on github
 ```
 ```
 source ~/.bashrc
