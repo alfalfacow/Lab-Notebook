@@ -6,7 +6,7 @@
 
 2: Installing Conda and Mamba
 * 2.1: Conda
-* 2.2: Mamba
+* 2.2: Mamba (specifically Micromamba)
 
 3: Creating and Using an environment
 * 3.1: Create
