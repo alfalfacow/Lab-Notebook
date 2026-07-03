@@ -285,6 +285,9 @@ VlnPlot(SeuratObject_subset, features = c("gene1", "gene2", "gene3"))
 ```
 
 ### 4.3: Manually annotating cell type
+# BIG NOTE #
+Read this section with caution. Visium spots (any version that is not VisiumHD) are 55 micrometers wide and thus capture many cells (typically between 1-10), so annotating each Visium spot as an individual cell is technically NOT fully accurate. To see established methods to bridge this gap, see section 2 for Cell Type deconvolution.
+
 We clustered our cells into similar populations (yay!), but now we have to decide the specific cell type that each cluster represents. One way to do this is to individually look at the strongest markers that were identified, using these markers to guide our manual labeling of each cell type. For example, CD3, CD4 and CD8 are well-established T cell markers, according to this [resource](https://www.antibodies.com/primary-antibodies/cell-markers/immune-cell-markers). There are also automatic computational methods to assign cell types based on a reference dataset, but results are highly variable.
 
 The manual annotation is very subjective and prone to error, but it allows for more control and is informed by known markers. No single technique for annotation is perfect, and unfortunately cell type annotation is one of the more "unstable" aspects of ST analyses.
