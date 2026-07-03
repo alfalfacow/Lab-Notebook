@@ -61,7 +61,18 @@ You will notice that these headers define the resources requested (# of nodes (-
 
 The output file will list the output of all the commands within the script. It will also document any errors, and is this very important for debugging errors that may arise. This file will be saved to the directory in which you submit the job (see next section on sbatch!).
 
-After these header components, the rest of the script will be the commands that are actually executed! This includes any directory changing, environment set up (see next page section 5 on conda/mamba environemts), and miscellaneous commands.
+After these header components, the rest of the script will be the commands that are actually executed! This includes any directory changing, environment set up, and miscellaneous commands.
+
+Environment set up for [conda](https://github.com/conda/conda/issues/7980) and [mamba](https://research.it.iastate.edu/micromamba-usage-guide) require very specific commands within the bash script. While conda/mamba may be configured on the login node (the terminal interface after logging in via ssh), this is not true for batch jobs sent to the compute node. Thus, we need to explicitly initialize conda/mamba and the environment of interest within our batch job. This is done directly following the initial header as described above.
+```
+#conda
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate my_env
+
+#micromamba
+eval "$(micromamba shell hook --shell=bash)"
+micromamba activate my_env
+```
 
 For more details on what each command in the header means, feel free to check out the example document linked above or the [official sbatch documentation](https://slurm.schedmd.com/sbatch.html)
 
@@ -94,3 +105,5 @@ squeue -u $USER #shows all jobs submitted by you
 * [UAB Slurm Batch Job script](https://docs.rc.uab.edu/cheaha/slurm/submitting_jobs/)
 * [JHU Slurm script tutorial](https://www.arch.jhu.edu/short-tutorial-how-to-create-a-slurm-script/)
 * [Batch Jobs + Scripting guide](https://curc.readthedocs.io/en/latest/running-jobs/batch-jobs.html)
+* [Conda setup in batch job](https://github.com/conda/conda/issues/7980)
+* [Micromamba setup in batch job](https://research.it.iastate.edu/micromamba-usage-guide)
