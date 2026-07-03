@@ -1,4 +1,4 @@
-# Environments and Installation
+# Submitting Batch Jobs
 
 ## Table of Contents
 
