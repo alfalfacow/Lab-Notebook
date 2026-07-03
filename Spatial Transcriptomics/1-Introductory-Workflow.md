@@ -92,7 +92,7 @@ Format:
 * -> (File) features.tsv
 * -> (File) barcodes.tsv
 
-Next, we can load these files as a "sparse matrix" object without any of the spatial data involved YET, using the Read10X command from Seurat
+Next, we can load these files as a "sparse matrix" object without any of the spatial data involved YET, using the Read10X command from Seurat. This command expects the files to be gzipped (.gz), so you do NOT have to run the gunzip command like in section 1.1.
 ```
 filter_matrix <- Read10X("path/to/arbitrary_folder_name")
 ```
