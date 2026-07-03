@@ -65,6 +65,15 @@ NameOfSeuratObject <- Load10X_Spatial(data.dir, filename="(SampleName)_filtered_
 glimpse(HNSCC) #Allows you to look at the type of data included in a Seurat Object
 
 ```
+Sometimes, the files may come in a .gz format (compressed file format known as gzip), similar to a .zip file. To read these files, they must be unzipped first. This can be done through the terminal/command line using the gunzip function:
+```
+cd /path/to/folder/with/files/you/want/to/unzip #cd = change directory, into the folder with the zipped files for easy access
+gunzip file_name.format.gz #this gunzips a single file
+gunzip file1.format.gz file2.format.gz file3.format.gz #this gunzips multiple files
+gunzip *.gz #this gunzips all files in the current directory (from the cd command) that end in .gz
+```
+If you are curious, for other must-know linux commands for use on command terminal, see [section 0]() of the Supercomputer "chapter" of this lab ntebook!
+
 ### 1.2: .mtx file
 Another format for the gene expression matrix is the .mtx format (usually named (sample name)_matrix.mtx; [see this example](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM9322957). This requires a slightly different workflow for loading in the data into Seurat: since the Load10X_Spatial command recognizes .h5 files, we have to convert the .mtx file into an .h5 file.
 
