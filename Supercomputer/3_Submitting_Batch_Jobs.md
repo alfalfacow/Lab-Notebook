@@ -107,3 +107,4 @@ squeue -u $USER #shows all jobs submitted by you
 * [Batch Jobs + Scripting guide](https://curc.readthedocs.io/en/latest/running-jobs/batch-jobs.html)
 * [Conda setup in batch job](https://github.com/conda/conda/issues/7980)
 * [Micromamba setup in batch job](https://research.it.iastate.edu/micromamba-usage-guide)
+* [Micromamba documentation + shell hook](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html)
