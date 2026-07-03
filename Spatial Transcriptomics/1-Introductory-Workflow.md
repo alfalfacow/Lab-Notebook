@@ -41,7 +41,7 @@ There are many different data formats for spatial transcriptomics that may be pr
 ### 1.1: filtered_feature_bc_matrix.h5 file
 The most common (in my experience) main output file from a Visium dataset is the filtered_feature_bc_matrix.h5, which contains the gene expression data. However, there are other files that make up the dataset that fully distinguish it as a spatial transcriptomics dataset, including the image file of the tissue sample (a .png file) the coordinates of each Visium "cell spot" (tissue_positions_list.csv), and a "scale factor" file that helps to scale the cell spots and map the coordinates onto the image (scalefactors_json.json).
 
-To read the dataset into Seurat as a Seurat object, the files for each ONE specific sample need to be organized in a very specific structure. This specific structure is recognized with Seurat's Load10X_Spatial command.
+To read the dataset into Seurat as a Seurat object, the files for EACH specific sample need to be organized in a very specific structure. This specific structure is recognized with Seurat's Load10X_Spatial command.
 
 * (Folder) Sample name
 * -> (File) (SampleName)_filtered_feature_bc_matrix.h5
@@ -66,7 +66,58 @@ glimpse(HNSCC) #Allows you to look at the type of data included in a Seurat Obje
 
 ```
 ### 1.2: .mtx file
-Another format for the gene expression matrix is the .mtx format (usually named (sample name)_matrix.mtx; [see this] example(https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM9322957). This requires a slightly different workflow for loading in the data into Seurat.
+Another format for the gene expression matrix is the .mtx format (usually named (sample name)_matrix.mtx; [see this example](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM9322957). This requires a slightly different workflow for loading in the data into Seurat: since the Load10X_Spatial command recognizes .h5 files, we have to convert the .mtx file into an .h5 file.
+
+To do this, we will need 3 components from the dataset to make up the .h5 file: "matrix.mtx" (gene expression matrix), "features.tsv" (gene names), and "barcodes.tsv" (name of each spot, labeled with a genetic barcode). We will use the [write10x](https://rdrr.io/bioc/DropletUtils/man/write10xCounts.html) function from the DropletUtils package.
+
+Begin by installing and loading the DropletUtils package from Biocondutor!
+```
+BiocManager::install("DropletUtils") #install package from Bioconductor
+library(DropletUtils) #load package into current R session
+```
+Then, we need to prepare the necessary files. Move the aforementioned 3 components (matrix.mtx, features.tsv, and barcodes.tsv) into the same folder on your computer. You will need to note the path to this folder (example: this format /home/user/desktop, or something similar. You can find this on a mac by right clicking the folder in your file explorer and holding the option button, then clicking "copy (filename) as pathname".)
+
+Format:
+* (Folder) arbitrary_folder_name
+* -> (File) matrix.mtx
+* -> (File) features.tsv
+* -> (File) barcodes.tsv
+
+Next, we can load these files as a "sparse matrix" object without any of the spatial data involved YET, using the Read10X command from Seurat
+```
+filter_matrix <- Read10X("path/to/arbitrary_folder_name")
+```
+
+Then, we use the write10xCounts command to convert this matrix object into a .h5 file format:
+```
+write10xCounts(
+  path = "/path/to/desired/location/filtered_feature_bc_matrix.h5", #this line specifies the path to the folder/location where the .h5 file                                                                         will be made, as well as the name of the .h5 file
+  x = filter_matrix, #this is the matrix object we created earlier
+  genome = "GRCh38", #current human reference genome used for gene alignment
+  type = "HDF5", #this is the type of file we want to make (HDF5 is same as .h5 file format)
+  version = "3", #current version of CellRanger
+  gene.id = rownames(filter_matrix),
+  gene.symbol = rownames(filter_matrix) 
+)
+```
+Now you can use this file to load the data into Seurat using the steps from section 1.1!
+
+You might be wondering: why are there different formats if there are technically able to be interconverted? According to the [CellRanger website](https://www.10xgenomics.com/support/jp/software/cell-ranger/latest/analysis/outputs/cr-outputs-mex-matrices) (a tool from 10X genomics that converts the raw expression data from single cell and spatial transcriptomics pipelines into gene expression matrices), earlier versions of CellRanger (v3 and before) output .mtx, while later versions output the filtered_feature_bc_matrix.h5 file).
+
+### 1.3 .rds file
+For GEO datasets this pretty much never appears, but for other public repositories, researchers may choose to save their own Seurat objects as a .rds file. A .rds file stands for "R Data Serialization", with [serialization](https://www.geeksforgeeks.org/r-language/data-serialization-rds-using-r/) defined as "the process of converting complex data structures into an understandable format, suitable for storage and transmission".
+
+To load a .rds file into the environment, simply use the [readRDS()](https://rdrr.io/r/base/readRDS.html) command!
+```
+readRDS("file_name.rds") #use this if is already within the R studio working directory
+readRDS("/path/to/file_name.rds") #use this if the rds file is not within the R studio working directory
+```
+There is also a .rda format, which can store multiple objects. Load this using the [load() function](https://www.r-bloggers.com/2017/04/load-save-and-rda-files/) (very simple!)
+```
+load("file.rda")
+load("/path/to/file.rda")
+```
+Again, this format is pretty rare for spatial transcriptomics/visium datasets, but now you will be prepared for it! 
 
 ## Step 2: Data Quality Control and Preprocessing
 To make sure that our data is high quality, the next steps are to quality control and normalize the data. We want to filter out low quality spots (quality control), including spots with with too little or too many genes detected, or spots with a high proportion of unwanted mitochondrial and ribosomal DNA. We also want to normalize the data to account for "variance in molecular counts" among different spots of the tissue (due to technology imperfections and biological differences). 
@@ -270,6 +321,7 @@ Feel free to reach out of any of the code does not work as intended! I have also
 * [Seurat Command List](https://satijalab.org/seurat/articles/essential_commands.html#seurat-standard-worflow)
 * [Preprocessing/QC and Normalization](https://yu-tong-wang.github.io/talk/sc_st_data_analysis_R.html#quality-contro)
 * [Reading in .mtx files](https://github.com/satijalab/seurat/issues/7157)
+* [scRNA seq tutorial](https://bioinformatics.ccr.cancer.gov/docs/singlecell-spatial-2026/IntroSeurat2026/IntroSeurat2026.html)
 
 ## Food For Thought
 * [Biologists, stop putting UMAP plots in your papers](https://simplystatistics.org/posts/2024-12-23-biologists-stop-including-umap-plots-in-your-papers/)
