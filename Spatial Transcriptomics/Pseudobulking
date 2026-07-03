@@ -1,1 +1,9 @@
+TBA very soon
+https://www.youtube.com/watch?v=nt_fOIkNS0s (https://immunogenomics.github.io/presto/reference/collapse_counts.html)
 
+Pseudo-bulk generation (https://pmc.ncbi.nlm.nih.gov/articles/PMC10781769/#Sec34)
+We generated pseudo-bulk from the ST samples using the sumCountsAcrossCells function from the Scater package[61](https://pmc.ncbi.nlm.nih.gov/articles/PMC10781769/#CR61). Here, counts were normalized by the total number of reads (counts per million normalization). We used the filterByExpr function from the edgeR package[62](https://pmc.ncbi.nlm.nih.gov/articles/PMC10781769/#CR62) to filter out genes with less than 50 counts per sample.
+
+https://www.nature.com/articles/s41467-020-19894-4 
+Aggregation-based methods
+We summarize the input measurement values for a given gene over all cells in each subpopulation and by sample. The resulting pseudobulk data matrix has dimensions G × S, where S denotes the number of samples, with one matrix obtained per subpopulation.
