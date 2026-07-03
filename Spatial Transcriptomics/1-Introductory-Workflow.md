@@ -7,8 +7,8 @@ These instructions are a compilation of the common workflow for dealing with seq
 
 ## Table of Contents
 
-1: Data Entry
-* 1.1: filtered_feature_bc_matrix.h5 file
+1: Loading Data/Data Entry
+* 1.1: filtered_feature_bc_matrix.h5 file (most common!)
 * 1.2: .mtx file
 * 1.3: .rds file
 
@@ -25,7 +25,7 @@ These instructions are a compilation of the common workflow for dealing with seq
 * 4.2: Finding gene markers for each cluster
 * 4.3: Manually annotating cell type
 
-## Step 1: Data Entry
+## Step 1: Loading Data/Data Entry
 First, you will have to install and initialize the Seurat package on an R studio window.
 ```
 install.packages("Seurat")
