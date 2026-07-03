@@ -5,10 +5,12 @@
 1: Login vs Compute nodes
 
 2: Jobs and Schedulers
-* Jobs
-* Schedulers
+* 2.1: Jobs
+* 2.2: Schedulers
 
 3: Anatomy of a Batch Job
+* 3.1: Header
+* 3.2: Environment setup (Conda/Micromamba)
 
 4: Submitting a Batch Job
 
@@ -33,6 +35,7 @@ SLURM batch jobs are submitted in the form of a plain text file (.txt, .sh, .sl,
 
 Here is a link to an example document/template with the proper batch job heading and format: [click here](https://docs.google.com/document/d/1zPe-o6Lg4T1DdZSLBxcUbOc4Nkr5nwozAY92RcC7Xl8/edit?tab=t.0)
 
+### 3.1: Header
 You will notice that the first line is "#!/bin/bash" and that the header section includes many lines beginning with #SBATCH. 
 
 The first line is known as the "interpreter directory" (aka the "shebang"), and it gives information on what application to use to run the script within the batch job. The "#!" represents "interpretor directory", and "/bin/bash" says that the bash shell is the application that will run the script.
@@ -61,8 +64,9 @@ You will notice that these headers define the resources requested (# of nodes (-
 
 The output file will list the output of all the commands within the script. It will also document any errors, and is this very important for debugging errors that may arise. This file will be saved to the directory in which you submit the job (see next section on sbatch!).
 
-After these header components, the rest of the script will be the commands that are actually executed! This includes any directory changing, environment set up, and miscellaneous commands.
+For more details on what each command in the header means, feel free to check out the example document linked above or the [official sbatch documentation](https://slurm.schedmd.com/sbatch.html)
 
+### 3.2: Environment setup (Conda/Micromamba)
 Environment set up for [conda](https://github.com/conda/conda/issues/7980) and [mamba](https://research.it.iastate.edu/micromamba-usage-guide) require very specific commands within the bash script. While conda/mamba may be configured on the login node (the terminal interface after logging in via ssh), this is not true for batch jobs sent to the compute node. Thus, we need to explicitly initialize conda/mamba and the environment of interest within our batch job. This is done directly following the initial header as described above.
 ```
 #conda
@@ -74,7 +78,7 @@ eval "$(micromamba shell hook --shell=bash)"
 micromamba activate my_env
 ```
 
-For more details on what each command in the header means, feel free to check out the example document linked above or the [official sbatch documentation](https://slurm.schedmd.com/sbatch.html)
+After the header and environment setup, the rest of the script consists of the commands and computations you want to run on the compute node! This will depend on the specific package or software you want to run, and there will be separate documentation for every package.
 
 ## 4: Submitting a batch job
 Once you set up a batch job file (text file), it is very easy to submit it! Move or copy the batch job file into your current directory after logging into your supercomputer account. This can be done very easily using the SFTP tab in Termius. Then, use the sbatch command to send the batch job file to the Expanse compute nodes!
