@@ -2,3 +2,5 @@
 * Visualization of marker genes on UMAP
 * EnrichR
 * SingleR
+* rctd
+* cell2location
