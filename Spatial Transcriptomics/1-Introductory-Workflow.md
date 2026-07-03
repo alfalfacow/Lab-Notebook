@@ -8,6 +8,9 @@ These instructions are a compilation of the common workflow for dealing with seq
 ## Table of Contents
 
 1: Data Entry
+* 1.1: filtered_feature_bc_matrix.h5 file
+* 1.2: .mtx file
+* 1.3: .rds file
 
 2: Data Quality Control and Preprocessing
 * 2.1: Quality Control
@@ -23,9 +26,22 @@ These instructions are a compilation of the common workflow for dealing with seq
 * 4.3: Manually annotating cell type
 
 ## Step 1: Data Entry
-First, you will need to obtain a spatial transcriptomics dataset, either from a publically accessible dataset or one you generated yourself. An example is the [GSE281978](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281978) series from the Gene Expression Omnibus (GEO) for Head and Neck Cancer (HNSC). The dataset can be downloaded as a tar file at the bottom of the page.
+First, you will have to install and initialize the Seurat package on an R studio window.
+```
+install.packages("Seurat")
+library(Seurat)
+```
 
-To read the dataset into Seurat as a Seurat object, the files for each ONE specific sample need to be organized in a very specific structure in order for Seurat to be able to recognize it:
+Next, you will need to obtain a spatial transcriptomics dataset, either from a publically accessible dataset or one you generated yourself. An example is the [GSE281978](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281978) series from the Gene Expression Omnibus (GEO) for Head and Neck Cancer (HNSC). The dataset can be downloaded as a tar file at the bottom of the page.
+
+NOTE: This page will mostly focus on 10x Genomics Visium spatial transcriptomics datasets.
+
+There are many different data formats for spatial transcriptomics that may be present on GEO or other datasets. We will focus on three different ways that gene expression data is stored
+
+### 1.1: filtered_feature_bc_matrix.h5 file
+The most common (in my experience) main output file from a Visium dataset is the filtered_feature_bc_matrix.h5, which contains the gene expression data. However, there are other files that make up the dataset that fully distinguish it as a spatial transcriptomics dataset, including the image file of the tissue sample (a .png file) the coordinates of each Visium "cell spot" (tissue_positions_list.csv), and a "scale factor" file that helps to scale the cell spots and map the coordinates onto the image (scalefactors_json.json).
+
+To read the dataset into Seurat as a Seurat object, the files for each ONE specific sample need to be organized in a very specific structure. This specific structure is recognized with Seurat's Load10X_Spatial command.
 
 * (Folder) Sample name
 * -> (File) (SampleName)_filtered_feature_bc_matrix.h5
@@ -49,6 +65,8 @@ NameOfSeuratObject <- Load10X_Spatial(data.dir, filename="(SampleName)_filtered_
 glimpse(HNSCC) #Allows you to look at the type of data included in a Seurat Object
 
 ```
+### 1.2: .mtx file
+Another format for the gene expression matrix is the .mtx format (usually named (sample name)_matrix.mtx; [see this] example(https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM9322957). This requires a slightly different workflow for loading in the data into Seurat.
 
 ## Step 2: Data Quality Control and Preprocessing
 To make sure that our data is high quality, the next steps are to quality control and normalize the data. We want to filter out low quality spots (quality control), including spots with with too little or too many genes detected, or spots with a high proportion of unwanted mitochondrial and ribosomal DNA. We also want to normalize the data to account for "variance in molecular counts" among different spots of the tissue (due to technology imperfections and biological differences). 
@@ -251,6 +269,7 @@ Feel free to reach out of any of the code does not work as intended! I have also
 * [Seurat ST Vignette](https://satijalab.org/seurat/articles/spatial_vignette)
 * [Seurat Command List](https://satijalab.org/seurat/articles/essential_commands.html#seurat-standard-worflow)
 * [Preprocessing/QC and Normalization](https://yu-tong-wang.github.io/talk/sc_st_data_analysis_R.html#quality-contro)
+* [Reading in .mtx files](https://github.com/satijalab/seurat/issues/7157)
 
 ## Food For Thought
 * [Biologists, stop putting UMAP plots in your papers](https://simplystatistics.org/posts/2024-12-23-biologists-stop-including-umap-plots-in-your-papers/)
