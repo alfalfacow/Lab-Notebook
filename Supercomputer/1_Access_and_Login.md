@@ -59,4 +59,7 @@ This feature allows you to drag, copy+paste, and manipulate files between both c
 
 ![Alt text](https://github.com/alfalfacow/Spatial-Transcriptomics/blob/main/Images/Termius4.png)
 
+To change the directory/folder shown on the SFTP tab, simply click the top bar where it lists the path of folders and type in your desired path!
+![Alt text](https://github.com/alfalfacow/Lab-Notebook/blob/main/Images/termius_cd.png)
+
 I hope that these notes have taught you a bit more about supercomputers and how to log into your Expanse account!
