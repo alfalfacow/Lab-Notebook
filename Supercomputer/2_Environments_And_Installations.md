@@ -193,7 +193,7 @@ conda env create --file environment.yml
 The environment.yml file should be in the same directory as your current directory so you are able to access it!
 
 ## 5: Considerations for batch jobs
-Accessing Conda and Mamba environments via batch jobs requires specific commands and details. These are described in the next page, section __.
+Accessing Conda and Mamba environments via batch jobs requires specific commands and details. These are described in the [next page, section 3.2](https://github.com/alfalfacow/Lab-Notebook/blob/main/Supercomputer/3_Submitting_Batch_Jobs.md).
 
 That's all for environments; please let me know if any of the code doesn't work, is outdated, or if there are any factual errors!
 
