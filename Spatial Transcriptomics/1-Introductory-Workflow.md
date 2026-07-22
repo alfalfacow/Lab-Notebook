@@ -45,7 +45,7 @@ To read the dataset into Seurat as a Seurat object, the files for EACH specific 
 
 * (Folder) Sample name
 * -> (File) (SampleName)_filtered_feature_bc_matrix.h5
-* -> (Folder) (SampleName)
+* -> (Folder) (Spatial)
 * ->-> (File) tissue_lowres_image.png
 * ->-> (File) scalefactors_json.json
 * ->-> (File) tissue_positions_list.csv
