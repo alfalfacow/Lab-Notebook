@@ -117,15 +117,15 @@ micromamba create -n r_environment r-base
 
 #For everything in the brackets, replace with actual information of interest
 conda create --name <ENV_NAME> #most simple
-conda create --name <ENV_NAME> <PACKAGE>=<VERSION> <PACKAGE> <PACKAGE> #create the environment, and download 3 packages as specified
-conda create -n <ENV_NAME> python=<name_of_Python_version> #for python, example version: 3.10, note that specfiying version is optional
-conda create -n <name_of_environment> r-base=<name_of_R_version> #for R studio, example version: 4.2.3, note that specfiying version is optional
+conda create --name <ENV_NAME> -c conda-forge <PACKAGE>=<VERSION> <PACKAGE> <PACKAGE> #create the environment, and download 3 packages as specified
+conda create -n <ENV_NAME> -c conda-forge python=<name_of_Python_version> #for python, example version: 3.10, note that specfiying version is optional
+conda create -n <name_of_environment> -c conda-forge r-base=<name_of_R_version> #for R studio, example version: 4.2.3, note that specfiying version is optional
 
 #literally the same except (micro)mamba instead of conda!
 micromamba create --name <ENV_NAME> #most simple
 micromamba create --name <ENV_NAME> <PACKAGE>=<VERSION> <PACKAGE> <PACKAGE> #create the environment, and download 3 packages as specified
-micromamba create -n <ENV_NAME> python=<name_of_Python_version> #for python
-micromamba create -n <name_of_environment> r-base=<name_of_R_version> #for R studio
+micromamba create -n <ENV_NAME> -c conda-forge python=<name_of_Python_version> #for python
+micromamba create -n <name_of_environment> -c conda-forge r-base=<name_of_R_version> #for R studio
 ```
 Note: for creating environments with R studio, it is recommended to use micromamba due to the faster and lighter nature compared to conda, as described above. The first time I tried this with conda, it kept failing.
 
