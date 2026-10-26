@@ -126,6 +126,7 @@ micromamba create --name <ENV_NAME> #most simple
 micromamba create --name <ENV_NAME> <PACKAGE>=<VERSION> <PACKAGE> <PACKAGE> #create the environment, and download 3 packages as specified
 micromamba create -n <ENV_NAME> -c conda-forge python=<name_of_Python_version> #for python
 micromamba create -n <name_of_environment> -c conda-forge r-base=<name_of_R_version> #for R studio
+micromamba create -p <desired/path/to/name_of_environment> -c conda-forge r-base=<name_of_R_version> #for R studio
 ```
 Note: for creating environments with R studio, it is recommended to use micromamba due to the faster and lighter nature compared to conda, as described above. The first time I tried this with conda, it kept failing.
 
