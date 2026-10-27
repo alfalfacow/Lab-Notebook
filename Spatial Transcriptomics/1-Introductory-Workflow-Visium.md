@@ -50,7 +50,7 @@ To read the dataset into Seurat as a Seurat object, the files for EACH specific 
 * ->-> (File) scalefactors_json.json
 * ->-> (File) tissue_positions_list.csv
 
-It's very important that the folder is named "Spatial", as this is the name that the function looks for. You may need to manually change the contents and names of the files in order to achieve this structure. Now we are ready to read our data on R studio!
+It's very important that the folder is named "spatial", as this is the name that the function looks for. You may need to manually change the contents and names of the files in order to achieve this structure. Now we are ready to read our data on R studio!
 
 ```
 #Load in Necessary Packages
